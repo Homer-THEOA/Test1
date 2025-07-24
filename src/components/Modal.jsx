@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export default function Modal({ data, onClose }) {
+export default function Modal() {
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShow(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!show) return null;
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg p-6 max-w-md">
-        <h2 className="text-xl font-bold mb-2 text-blue-600">{data.title}</h2>
-        <img src={data.image} alt={data.title} className="mb-4 rounded" />
-        <p className="text-gray-700 mb-4">{data.longDescription}</p>
-        <button
-          onClick={onClose}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  );
-}
+    <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
+      <div className="bg-white rounded-xl shadow-lg p-6 w-80 text-center">
+        <h2 className="text-lg font-semibold mb-2">Welcome to CTA Timeline</h2>
+        <p className="text-sm text-gray-600">Explore our journey from 2011 t
