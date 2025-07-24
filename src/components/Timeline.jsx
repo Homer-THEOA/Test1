@@ -1,43 +1,36 @@
-import React, { useState } from "react";
-import timelineData from "../data/timelineData";
-import Modal from "./Modal";
+import React from "react";
+
+const timelineData = [
+  { year: 2011, text: "CTA Foundation established, focusing on education and outreach." },
+  { year: 2012, text: "First community program launched for rural schools." },
+  { year: 2013, text: "Expanded healthcare initiatives in underserved regions." },
+  { year: 2014, text: "Introduced vocational training for youth empowerment." },
+  { year: 2015, text: "Reached 10,000 beneficiaries across multiple districts." },
+  { year: 2016, text: "Started women entrepreneurship support programs." },
+  { year: 2017, text: "Built first skill development center in partnership with NGOs." },
+  { year: 2018, text: "Launched scholarship fund for higher education." },
+  { year: 2019, text: "Achieved milestone of 50 community events conducted." },
+  { year: 2020, text: "COVID-19 relief programs and emergency aid distribution." },
+  { year: 2021, text: "Digital literacy initiatives launched for rural youth." },
+  { year: 2022, text: "Green energy projects introduced in remote areas." },
+  { year: 2023, text: "Expanded operations to neighboring states." },
+  { year: 2024, text: "Reached 100,000 lives positively impacted." },
+  { year: 2025, text: "Celebrating 14 years of community transformation." },
+];
 
 export default function Timeline() {
-  const years = Object.keys(timelineData);
-  const [selectedYear, setSelectedYear] = useState(years[0]);
-  const [modalData, setModalData] = useState(null);
-
   return (
-    <div>
-      <div className="flex overflow-x-auto space-x-2 mb-4">
-        {years.map((year) => (
-          <button
-            key={year}
-            onClick={() => setSelectedYear(year)}
-            className={`px-4 py-2 border rounded-full ${
-              selectedYear === year ? "bg-blue-600 text-white" : "bg-white text-blue-600"
-            }`}
-          >
-            {year}
-          </button>
-        ))}
-      </div>
-
-      <div className="flex space-x-4 overflow-x-auto">
-        {timelineData[selectedYear].map((item, idx) => (
-          <div
-            key={idx}
-            className="min-w-[250px] border rounded-lg p-4 hover:shadow-lg hover:scale-105 transition-transform cursor-pointer"
-            onClick={() => setModalData(item)}
-          >
-            <img src={item.image} alt={item.title} className="mb-2 rounded" />
-            <h3 className="font-bold">{item.title}</h3>
-            <p className="text-sm">{item.shortDescription}</p>
+    <div className="relative">
+      <h2 className="text-3xl font-bold text-center mb-10">Our Journey</h2>
+      <div className="relative border-l-2 border-blue-400 ml-6">
+        {timelineData.map((item, index) => (
+          <div key={index} className="mb-8 ml-4">
+            <div className="absolute w-3 h-3 bg-blue-400 rounded-full -left-1.5 mt-2"></div>
+            <p className="text-sm text-gray-500">{item.year}</p>
+            <h3 className="text-lg font-semibold">{item.text}</h3>
           </div>
         ))}
       </div>
-
-      {modalData && <Modal data={modalData} onClose={() => setModalData(null)} />}
     </div>
   );
 }
